@@ -5,6 +5,7 @@ $(document).ready(function () {
     var winCount = 0;
     var lossCount = 0;
     var userCount = 0;
+    var isGameEnd = false;
     var numberOptions = [];
     
     //// functions
@@ -20,6 +21,7 @@ $(document).ready(function () {
     function initGame(){
         userCount = 0;
         randomNumber = Math.floor(Math.random() * 101) + 19;
+        isGameEnd = false;
         // numberOptions = [10, 1, 3, 7];
 
         // add random values to numberOptions
@@ -53,14 +55,16 @@ $(document).ready(function () {
         
         $("#userCount").html(userCount);
         
-        if(userCount == randomNumber){
+        if((userCount == randomNumber) && !isGameEnd){
             winCount++;
+            isGameEnd = true;
             $("#win").html(winCount);
             $("#statusMsg").html("You Win!");
             setTimeout(initGame, 2000);
         }
-        else if(userCount > randomNumber){
+        else if((userCount > randomNumber) && !isGameEnd){
             lossCount++;
+            isGameEnd = true;
             $("#loss").html(lossCount);
             $("#statusMsg").html("You Lose!");
             setTimeout(initGame, 2000);
